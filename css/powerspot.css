@@ -1,0 +1,12 @@
+#banner {
+    max-width: 100%;
+    height: auto
+}
+
+#map {
+    height: 300px;
+    width: 95%;
+    border: 4px solid white;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

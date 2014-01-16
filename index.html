@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>そうだ！パワースポットへ行こう＠ふじのくに</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"></script> -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <link rel="stylesheet" href="css/powerspot.css">
+    <script src="js/func.js?v=20140114_03"></script>
+    <script src="js/event.js?v=20140114_03"></script>
+</head>
+<body>
+
+<!-- トップページ -->
+<div data-role="page" id="homePage" data-title="そうだ！パワースポットへ行こう＠ふじのくに" data-theme="a">
+    <div data-role="header" data-position="fixed">
+        <img id="banner" src="img/angelps.png">
+    </div>
+
+    <div id="category" data-role="content">
+    </div>
+
+    <div data-role="footer">
+        <h4>Copyright 2014</h4>
+    </div>
+</div>
+
+<!-- 検索ページ -->
+<div data-role="page" data-close-btn="none" data-dialog="true" id="searchPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに"
+     data-theme="a">
+    <div data-role="content">
+        <p>検索キーワードを入力してください</p>
+        <input type="text" id="keyword">
+        <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-b">OK</a>
+    </div>
+</div>
+
+<!-- 一覧ページ -->
+<div data-role="page" id="listPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに">
+    <div data-role="header" data-position="fixed">
+        <a href="#homePage" data-role="button" data-transition="slide" data-direction="reverse"
+           data-icon="carat-l">Back</a>
+
+        <h2 id="listTitle"></h2>
+    </div>
+
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <label>絞り込み：</label>
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <select id="area"></select>
+                <select id="city"></select>
+            </fieldset>
+        </div>
+        <ul id="pslist" data-role="listview" data-filter="true">
+        </ul>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#homePage" data-icon="home"></a></li>
+                <li><a href="#listPage" data-icon="bullets" class="ui-btn-active ui-state-persist"></a></li>
+                <li><a href="#" data-icon="location" class="ui-disabled"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 詳細ページ -->
+<div data-role="page" id="detailPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに">
+    <div data-role="header" data-add-back-btn="true" data-position="fixed">
+        <h1 id="detailTitle"></h1>
+    </div>
+
+    <div data-role="content">
+        <div id="map" class="ui-shadow"></div>
+        <div id="detail"></div>
+        <div>
+            <a id="map_route" target="_blank" href="">Google Mapで現在地からの経路検索</a>
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#homePage" data-icon="home"></a></li>
+                <li><a href="#listPage" data-icon="bullets"></a></li>
+                <li><a href="#detailPage" data-icon="location" class="ui-btn-active ui-state-persist"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
