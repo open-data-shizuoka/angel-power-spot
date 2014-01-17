@@ -62,6 +62,8 @@
         $city.selectmenu();
         $city.selectmenu('refresh', true);
         $city.parent().find('.ui-btn-text').html('');
+        // 初期時は市町プルダウンは非表示
+        $city.parent().hide();
 
         // 地域プルダウン用XML取得
         $.ajax({
@@ -129,6 +131,8 @@
                     });
                     // 地域プルダウンの選択によるリスト絞り込み
                     powerspot.refineByArea();
+                    // 地域プルダウンが選択されている場合は市町プルダウンを表示
+                    $city.parent().show();
                 })
                 .fail(function () {
                     alert("情報の読み込みに失敗しました");
