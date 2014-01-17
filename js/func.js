@@ -86,7 +86,7 @@
         var startPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
         // 現在地から指定地までの経路検索用リンクの生成
-        var route = "http://maps.google.com/maps?saddr=" + startPos + "&daddr=" + gLatLng + "";
+        var route = "http://maps.google.com/maps?saddr=" + startPos.toUrlValue() + "&daddr=" + gLatLng.toUrlValue();
         $("#map_route").attr("href", route);
     }
 
