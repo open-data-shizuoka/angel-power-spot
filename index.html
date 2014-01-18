@@ -31,10 +31,11 @@
 <!-- 検索ページ -->
 <div data-role="page" data-close-btn="none" data-dialog="true" id="searchPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに"
      data-theme="a">
-    <div data-role="content">
+    <div data-role="content" style="text-align:center">
         <p>検索キーワードを入力してください</p>
         <input type="text" id="keyword">
-        <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-b">OK</a>
+       	<a href="#" id="keyword-cancel" data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">キャンセル</a>
+       	<a href="#" id="keyword-ok"     data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">OK</a>
     </div>
 </div>
 

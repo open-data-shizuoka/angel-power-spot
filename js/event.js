@@ -3,38 +3,22 @@
 
     // Event処理 詳細画面
     $(document).on({
-        "pagebeforecreate": function () {
-            // alert('pagecbeforecreate');
-        },
-        "pageinit": function () {
-            // alert('pageinit');
-        },
-        "pagebeforeshow": function () {
-            // alert('pagecbeforeshow');
-            // showMap();
-        },
         "pageshow": function () {
             // alert('pageshow');
             // MAP生成
             powerspot.showMap();
         },
-        "pagebeforehide": function () {
-            // alert('pagecbeforehide');
-        },
-        "pagehide": function (event) {
-            // alert('pagehide');
-            //$('#detail').empty();
-            //$('#map').empty();
-            //var page = $(event.target);
-            //page.remove();
-        }
     }, "#detailPage");
 
     // Event処理 検索画面
+	$(document).on({
+		"click": function () {
+			$('#keyword').val(""); // キャンセルボタンクリック時はキーワードを空に設定
+		}
+	}, "#keyword-cancel");
     $(document).on({
-        "pagebeforehide": function () {
-            //var keyword = $('#keyword').val();
-            //if (keyword === "") {}
+        "pagebeforeshow": function () {
+            $('#keyword').val(""); // ページ表示毎にキーワードを空に設定
         },
         "pagehide": function () {
             // キーワードが入力されていればキーワード検索してリストページ表示
