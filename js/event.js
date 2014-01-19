@@ -32,7 +32,7 @@
 
     // 岩田：以下は、地域プルダウンの生成のために必要です。当ファイルは呼び出しだけで、中身はfunc.jsに書く方がいいでしょうか。
     // ページ読み込み時処理
-    $(document).on('pageshow', '#homePage', function () {
+    $(document).on('pageshow', '#listPage', function () {
         var $area = $('#area'),
             $city = $('#city');
 
@@ -48,6 +48,7 @@
         $city.parent().find('.ui-btn-text').html('');
         // 初期時は市町プルダウンは非表示
         $city.parent().hide();
+        $area.parent().addClass('ui-last-child');
 
         // 地域プルダウン用XML取得
         $.ajax({
@@ -116,6 +117,7 @@
                     // 地域プルダウンの選択によるリスト絞り込み
                     powerspot.refineByArea();
                     // 地域プルダウンが選択されている場合は市町プルダウンを表示
+                    $area.parent().removeClass('ui-last-child');
                     $city.parent().show();
                 })
                 .fail(function () {
