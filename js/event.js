@@ -32,7 +32,7 @@
 
     // 岩田：以下は、地域プルダウンの生成のために必要です。当ファイルは呼び出しだけで、中身はfunc.jsに書く方がいいでしょうか。
     // ページ読み込み時処理
-    $(document).on('pageshow', '#homePage', function () {
+    $(document).on('pageshow', '#listPage', function () {
         var $area = $('#area'),
             $city = $('#city');
 
