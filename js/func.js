@@ -208,7 +208,7 @@
                 var spotComment = $("comment", this).text();
 
                 // title書き換え
-                $('#detailTitle').text(spotName);
+                $('#detailTitle').text($('#listTitle').text());
                 gSpotName = spotName;
 
                 // 情報表示
