@@ -10,3 +10,14 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+#category {
+    margin: 5px;
+    text-align: center;
+    border: 6px solid #FF99FF;
+    border-radius: 120% 5% 110% 5% / 5% 110% 5% 120%;
+}
+
+.search-box {
+  text-align: center;
+}
