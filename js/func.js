@@ -196,7 +196,7 @@
 
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc)
+        $pslist.append(loc);
         $pslist.listview();
         $pslist.listview('refresh');
     };
