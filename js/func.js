@@ -71,7 +71,7 @@
     })
         .done(function (xml) {
             gXml = xml;
-			// トップ画面のアイコン化によりコメントアウト
+            // トップ画面のアイコン化によりコメントアウト
             // createCategory();
         })
         .fail(function () {
@@ -126,8 +126,8 @@
         var $pslist = $('#pslist');
         $pslist.empty();
         $pslist.append(loc);
-		$pslist.listview();
-		$pslist.listview('refresh');
+        $pslist.listview();
+        $pslist.listview('refresh');
     };
 
     powerspot.showListByKeyword = function (keyword) {
@@ -151,8 +151,8 @@
         var $pslist = $('#pslist');
         $pslist.empty();
         $pslist.append(loc);
-		$pslist.listview();
-		$pslist.listview('refresh');
+        $pslist.listview();
+        $pslist.listview('refresh');
     };
 
     powerspot.showListByMystery = function () {
@@ -197,8 +197,8 @@
         var $pslist = $('#pslist');
         $pslist.empty();
         $pslist.append(loc)
-		$pslist.listview();
-		$pslist.listview('refresh');
+        $pslist.listview();
+        $pslist.listview('refresh');
     };
 
     powerspot.showDetail = function (showNo) {
