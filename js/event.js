@@ -7,15 +7,16 @@
             // alert('pageshow');
             // MAP生成
             powerspot.showMap();
-        },
+        }
     }, "#detailPage");
 
     // Event処理 検索画面
-	$(document).on({
-		"click": function () {
-			$('#keyword').val(""); // キャンセルボタンクリック時はキーワードを空に設定
-		}
-	}, "#keyword-cancel");
+    $(document).on({
+        "click": function () {
+            $('#keyword').val(""); // キャンセルボタンクリック時はキーワードを空に設定
+        }
+    }, "#keyword-cancel");
+
     $(document).on({
         "pagebeforeshow": function () {
             $('#keyword').val(""); // ページ表示毎にキーワードを空に設定
