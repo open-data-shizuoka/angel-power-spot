@@ -7,7 +7,7 @@
             // alert('pageshow');
             // MAP生成
             powerspot.showMap();
-        },
+        }
     }, "#detailPage");
 
     // Event処理 検索画面
