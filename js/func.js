@@ -125,7 +125,9 @@
         });
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc);
+		$pslist.listview();
+		$pslist.listview('refresh');
     };
 
     powerspot.showListByKeyword = function (keyword) {
@@ -148,7 +150,9 @@
         });
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc);
+		$pslist.listview();
+		$pslist.listview('refresh');
     };
 
     powerspot.showListByMystery = function () {
@@ -192,7 +196,9 @@
 
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc)
+		$pslist.listview();
+		$pslist.listview('refresh');
     };
 
     powerspot.showDetail = function (showNo) {
