@@ -14,7 +14,7 @@
         "4": "観光・自然・デート",
         "5": "諸願成就・その他",
         //"6":"カテゴリなし",
-        "77": "Lucky7",
+        "77": "ミステリ７",
         "88": "検索(keyword)",
         "99": "検索(全表示)"
     };
@@ -23,7 +23,7 @@
     function countSpot(showCategory) {
         var cnt = 0;
 
-        // Lucky7
+        // mystery7
         if (showCategory === "77") {
             return 7;
         }
@@ -52,7 +52,7 @@
                     btn = btn + '<li><a href="#searchPage" data-transition="pop">検索(keyword)<span class="ui-li-count">?</span></a></li>';
                 } else if (key === "77") {
                     // ラッキー7
-                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByLucky()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
+                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 } else {
                     btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showList(' + key + ')">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 }
@@ -151,9 +151,9 @@
         $pslist.append(loc).trigger('create').listview('refresh');
     };
 
-    powerspot.showListByLucky = function () {
+    powerspot.showListByMystery = function () {
         // title書き換え
-        $('#listTitle').text("Lucky7");
+        $('#listTitle').text("ミステリ7");
 
         // XML読み込み
         var spotArray = [];
