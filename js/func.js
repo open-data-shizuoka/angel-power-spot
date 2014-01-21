@@ -14,7 +14,7 @@
         "4": "観光・自然・デート",
         "5": "諸願成就・その他",
         //"6":"カテゴリなし",
-        "77": "Lucky7",
+        "77": "ミステリ７",
         "88": "検索(keyword)",
         "99": "検索(全表示)"
     };
@@ -106,9 +106,9 @@
         $pslist.append(loc).trigger('create').listview('refresh');
     };
 
-    powerspot.showListByLucky = function () {
+    powerspot.showListByMystery = function () {
         // title書き換え
-        $('#listTitle').text("Lucky7");
+        $('#listTitle').text("ミステリ7");
 
         // XML読み込み
         var spotArray = [];
@@ -163,7 +163,7 @@
                 var spotComment = $("comment", this).text();
 
                 // title書き換え
-                $('#detailTitle').text(spotName);
+                $('#detailTitle').text($('#listTitle').text());
                 gSpotName = spotName;
 
                 // 情報表示
