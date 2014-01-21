@@ -52,7 +52,7 @@
                     btn = btn + '<li><a href="#searchPage" data-transition="pop">検索(keyword)<span class="ui-li-count">?</span></a></li>';
                 } else if (key === "77") {
                     // ラッキー7
-                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByLucky()">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
+                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByLucky()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 } else {
                     btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showList(' + key + ')">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 }
@@ -71,7 +71,8 @@
     })
         .done(function (xml) {
             gXml = xml;
-            createCategory();
+			// トップ画面のアイコン化によりコメントアウト
+            // createCategory();
         })
         .fail(function () {
             alert("情報の読み込みに失敗しました");
