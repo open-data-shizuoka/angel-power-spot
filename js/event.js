@@ -31,8 +31,7 @@
         }
     }, "#searchPage");
 
-    // 岩田：以下は、地域プルダウンの生成のために必要です。当ファイルは呼び出しだけで、中身はfunc.jsに書く方がいいでしょうか。
-    // ページ読み込み時処理
+    // 一覧ページ読み込み時処理
     $(document).on('pageshow', '#listPage', function () {
         var $area = $('#area'),
             $city = $('#city');
@@ -60,7 +59,7 @@
         })
             .done(function (xml) {
                 // 地域プルダウンの未選択用項目の追加
-                $area.append($('<option>').attr({value: 0}).text("--地域を選択してください--"));
+                $area.append($('<option>').attr({value: 0}).text("--地域で絞り込む--"));
                 // 地域データをループ
                 $(xml).find("area").each(function () {
                     // 地域キーの取得
@@ -103,7 +102,7 @@
                         // 地域選択値配下にある市町データに対する処理
                         if (areaKey === selectArea) {
                             // 市町プルダウンの未選択用項目の追加
-                            $city.append($('<option>').attr({value: 0}).text("--市町を選択してください--"));
+                            $city.append($('<option>').attr({value: 0}).text("--市町で絞り込む--"));
                             // 該当地域ごとの市町データをループして取得
                             $(this).find("city").each(function () {
                                 // 市町キーの取得
@@ -117,16 +116,23 @@
                     });
                     // 地域プルダウンの選択によるリスト絞り込み
                     powerspot.refineByArea();
-                    // 地域プルダウンが選択されている場合は市町プルダウンを表示
-                    $area.parent().removeClass('ui-last-child');
-                    $city.parent().show();
+                    if ($area.val() === "0") {
+                        // 地域プルダウンが未選択値の場合
+                        // 市町プルダウンは非表示
+                        $city.parent().hide();
+                        $area.parent().addClass('ui-last-child');
+                    } else {
+                        // 地域プルダウンが選択されている場合は市町プルダウンを表示
+                        $area.parent().removeClass('ui-last-child');
+                        $city.parent().show();
+                    }
                 })
                 .fail(function () {
                     alert("情報の読み込みに失敗しました");
                 });
         });
 
-        // 地域プルダウンの変更時処理
+        // 市町プルダウンの変更時処理
         $city.change(function () {
             // 市町プルダウンの選択によるリスト絞り込み
             powerspot.refineByCity();
