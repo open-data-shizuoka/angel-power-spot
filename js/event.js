@@ -149,8 +149,14 @@
         if ($('#areaSearchCheck').val() === "true") {
             $area.parent().hide();
         } else {
-            $area.parent().addClass('ui-last-child');
+            // 通常の遷移では地域絞り込み機能を表示
             $area.parent().show();
+            // 市町絞り込みの表示有無で角丸設定の変更
+            if ($city.is(':visible')) {
+                $area.parent().addClass('');
+            } else {
+                $area.parent().addClass('ui-last-child');
+            }
         }
     });
 
