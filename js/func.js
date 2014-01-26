@@ -19,49 +19,6 @@
         "99": "検索(全表示)"
     };
 
-    // カテゴリ別スポット件数カウント
-    function countSpot(showCategory) {
-        var cnt = 0;
-
-        // mystery7
-        if (showCategory === "77") {
-            return 7;
-        }
-
-        $(gXml).find("spot").each(function () {
-            var spotCategory1 = $("category1", this).text();
-            var spotCategory2 = $("category2", this).text();
-            var spotCategory3 = $("category3", this).text();
-            if (showCategory === spotCategory1
-                || showCategory === spotCategory2
-                || showCategory === spotCategory3
-                || showCategory === "99") {
-                cnt++;
-            }
-        });
-        return cnt;
-    }
-
-    // カテゴリ選択ボタン作成
-    function createCategory() {
-        var btn = '<ul data-role="listview">';
-        for (var key in categoryArray) {
-            if (categoryArray.hasOwnProperty(key)) {
-                if (key === "88") {
-                    // キーワード検索
-                    btn = btn + '<li><a href="#searchPage" data-transition="pop">検索(keyword)<span class="ui-li-count">?</span></a></li>';
-                } else if (key === "77") {
-                    // ラッキー7
-                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
-                } else {
-                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showList(' + key + ')">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
-                }
-            }
-        }
-        btn = btn + '</ul>';
-        $('#category').append(btn).trigger('create').listview('refresh');
-    }
-
     //XML取得
     $.ajax({
         url: 'powerspot.xml',
@@ -71,8 +28,6 @@
     })
         .done(function (xml) {
             gXml = xml;
-            // トップ画面のアイコン化によりコメントアウト
-            // createCategory();
         })
         .fail(function () {
             alert("情報の読み込みに失敗しました");
