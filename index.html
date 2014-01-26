@@ -70,7 +70,7 @@
             </a>
         </div>
         <div class="ui-block-c">
-            <a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()">
+            <a href="#areaPage" data-transition="slide">
                 <div class="category-img"><img src="./img/top_icon_area.png"></div>
                 <div class="category-txt">エリア</div>
             </a>
@@ -90,6 +90,22 @@
         <input type="text" id="keyword">
         <a href="#" id="keyword-cancel" data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">キャンセル</a>
         <a href="#" id="keyword-ok"     data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">OK</a>
+    </div>
+</div>
+
+<!-- エリアページ -->
+<div data-role="page" data-close-btn="none" data-dialog="true" id="areaPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに"
+     data-theme="a">
+    <div class="search-box" data-role="content">
+        <p>地域を選択してください</p>
+        <fieldset data-role="controlgroup">
+            <select id="searchArea"></select>
+            <select id="searchCity"></select>
+        </fieldset>
+        <a href="#" id="area-cancel" data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">キャンセル</a>
+        <a href="#" id="area-ok"     data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">OK</a>
+        <!-- 以下のhiddenはエリア検索からの遷移の判定に使用 -->
+        <input type="hidden" id="areaSearchCheck">
     </div>
 </div>
 

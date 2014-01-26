@@ -128,6 +128,9 @@
         $pslist.append(loc);
         $pslist.listview();
         $pslist.listview('refresh');
+
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("false");
     };
 
     powerspot.showListByKeyword = function (keyword) {
@@ -153,6 +156,105 @@
         $pslist.append(loc);
         $pslist.listview();
         $pslist.listview('refresh');
+    };
+
+    powerspot.showListByArea = function (area) {
+        var cnt = 0;
+        var selectAreaVal = area.find('option:selected').val();
+        var selectAreaText = area.find('option:selected').text();
+        // title書き換え
+        $('#listTitle').text(selectAreaText);
+
+        // リスト作成
+        var loc = '';
+        $(gXml).find("spot").each(function () {
+            var spotNo = $("no", this).text();
+            var spotName = $("name", this).text();
+            var spotAdress = $("adress", this).text();
+
+            // 全リスト表示
+            loc = loc + '<li><a href="#detailPage" data-transition="slide" onClick="powerspot.showDetail(' + spotNo + ')"><h3>' + spotName + '</h3><p>' + spotAdress + '</p></a></li>';
+            cnt++;
+        });
+
+        var $pslist = $('#pslist');
+        $pslist.empty();
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
+
+        var $list = $('#pslist').find('li > a');
+
+        // pタグの親aタグを全非表示
+        $list.hide();
+
+        if (selectAreaVal === "0") {
+            // 市町プルダウンが未選択値の場合
+            // liタグ->aタグを全表示
+            $list.show();
+        } else {
+            // liタグ->aタグ->pタグの階層に合致するタグの全検索
+            $('#searchCity').find('option').each(function () {
+                var city = $(this).text();
+                $list.find('p').each(function () {
+                    if (($(this).text()).match(new RegExp(city))) {
+                        // 市町プルダウン文字列を含むリストの場合
+                        // pタグの親aタグを表示
+                        $(this).parent('a').show();
+                    }
+                });
+            });
+        }
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
+    };
+
+    powerspot.showListByCity = function (city) {
+        var cnt = 0;
+        var selectCityVal = city.find('option:selected').val();
+        var selectCityText = city.find('option:selected').text();
+        // title書き換え
+        $('#listTitle').text(selectCityText);
+
+        // リスト作成
+        var loc = '';
+        $(gXml).find("spot").each(function () {
+            var spotNo = $("no", this).text();
+            var spotName = $("name", this).text();
+            var spotAdress = $("adress", this).text();
+
+            // 全リスト表示
+            loc = loc + '<li><a href="#detailPage" data-transition="slide" onClick="powerspot.showDetail(' + spotNo + ')"><h3>' + spotName + '</h3><p>' + spotAdress + '</p></a></li>';
+            cnt++;
+        });
+
+        var $pslist = $('#pslist');
+        $pslist.empty();
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
+
+        var $list = $('#pslist').find('li > a');
+
+        // pタグの親aタグを全非表示
+        $list.hide();
+
+        if (selectCityVal === "0") {
+            // 市町プルダウンが未選択値の場合
+            // liタグ->aタグを全表示
+            $list.show();
+        } else {
+            // liタグ->aタグ->pタグの階層に合致するタグの全検索
+            $list.find('p').each(function () {
+                if (($(this).text()).match(new RegExp(selectCityText))) {
+                    // 市町プルダウン文字列を含むリストの場合
+                    // pタグの親aタグを表示
+                    $(this).parent('a').show();
+                }
+            });
+        }
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
     };
 
     powerspot.showListByMystery = function () {
