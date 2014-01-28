@@ -168,7 +168,6 @@
                 $area.parent().addClass('ui-last-child');
             }
         }
-		$('#area').val(0);
     });
 
     $(document).ready(function () {
