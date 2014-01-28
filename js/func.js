@@ -258,6 +258,9 @@
     };
 
     powerspot.showListByMystery = function () {
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
+
         // title書き換え
         $('#listTitle').text("ミステリ7");
 
