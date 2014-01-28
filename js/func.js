@@ -11,19 +11,19 @@
         "1": "子宝・安産",
         "2": "夫婦円満",
         "3": "縁結び",
-        "4": "観光・自然・デート",
-        "5": "諸願成就・その他",
+        "4": "デート",
+        "5": "諸願成就",
         //"6":"カテゴリなし",
-        "77": "Lucky7",
-        "88": "検索(keyword)",
-        "99": "検索(全表示)"
+        "77": "mystery７",
+        "88": "文字検索",
+        "99": "エリア検索"
     };
 
     // カテゴリ別スポット件数カウント
     function countSpot(showCategory) {
         var cnt = 0;
 
-        // Lucky7
+        // mystery7
         if (showCategory === "77") {
             return 7;
         }
@@ -49,10 +49,10 @@
             if (categoryArray.hasOwnProperty(key)) {
                 if (key === "88") {
                     // キーワード検索
-                    btn = btn + '<li><a href="#searchPage" data-transition="pop">検索(keyword)<span class="ui-li-count">?</span></a></li>';
+                    btn = btn + '<li><a href="#searchPage" data-transition="pop">文字検索<span class="ui-li-count">?</span></a></li>';
                 } else if (key === "77") {
                     // ラッキー7
-                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByLucky()">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
+                    btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 } else {
                     btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showList(' + key + ')">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
                 }
@@ -71,7 +71,8 @@
     })
         .done(function (xml) {
             gXml = xml;
-            createCategory();
+            // トップ画面のアイコン化によりコメントアウト
+            // createCategory();
         })
         .fail(function () {
             alert("情報の読み込みに失敗しました");
@@ -124,7 +125,12 @@
         });
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
+
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("false");
     };
 
     powerspot.showListByKeyword = function (keyword) {
@@ -147,12 +153,116 @@
         });
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
     };
 
-    powerspot.showListByLucky = function () {
+    powerspot.showListByArea = function (area) {
+        var cnt = 0;
+        var selectAreaVal = area.find('option:selected').val();
+        var selectAreaText = area.find('option:selected').text();
         // title書き換え
-        $('#listTitle').text("Lucky7");
+        $('#listTitle').text(selectAreaText);
+
+        // リスト作成
+        var loc = '';
+        $(gXml).find("spot").each(function () {
+            var spotNo = $("no", this).text();
+            var spotName = $("name", this).text();
+            var spotAdress = $("adress", this).text();
+
+            // 全リスト表示
+            loc = loc + '<li><a href="#detailPage" data-transition="slide" onClick="powerspot.showDetail(' + spotNo + ')"><h3>' + spotName + '</h3><p>' + spotAdress + '</p></a></li>';
+            cnt++;
+        });
+
+        var $pslist = $('#pslist');
+        $pslist.empty();
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
+
+        var $list = $('#pslist').find('li > a');
+
+        // pタグの親aタグを全非表示
+        $list.hide();
+
+        if (selectAreaVal === "0") {
+            // 市町プルダウンが未選択値の場合
+            // liタグ->aタグを全表示
+            $list.show();
+        } else {
+            // liタグ->aタグ->pタグの階層に合致するタグの全検索
+            $('#searchCity').find('option').each(function () {
+                var city = $(this).text();
+                $list.find('p').each(function () {
+                    if (($(this).text()).match(new RegExp(city))) {
+                        // 市町プルダウン文字列を含むリストの場合
+                        // pタグの親aタグを表示
+                        $(this).parent('a').show();
+                    }
+                });
+            });
+        }
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
+    };
+
+    powerspot.showListByCity = function (city) {
+        var cnt = 0;
+        var selectCityVal = city.find('option:selected').val();
+        var selectCityText = city.find('option:selected').text();
+        // title書き換え
+        $('#listTitle').text(selectCityText);
+
+        // リスト作成
+        var loc = '';
+        $(gXml).find("spot").each(function () {
+            var spotNo = $("no", this).text();
+            var spotName = $("name", this).text();
+            var spotAdress = $("adress", this).text();
+
+            // 全リスト表示
+            loc = loc + '<li><a href="#detailPage" data-transition="slide" onClick="powerspot.showDetail(' + spotNo + ')"><h3>' + spotName + '</h3><p>' + spotAdress + '</p></a></li>';
+            cnt++;
+        });
+
+        var $pslist = $('#pslist');
+        $pslist.empty();
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
+
+        var $list = $('#pslist').find('li > a');
+
+        // pタグの親aタグを全非表示
+        $list.hide();
+
+        if (selectCityVal === "0") {
+            // 市町プルダウンが未選択値の場合
+            // liタグ->aタグを全表示
+            $list.show();
+        } else {
+            // liタグ->aタグ->pタグの階層に合致するタグの全検索
+            $list.find('p').each(function () {
+                if (($(this).text()).match(new RegExp(selectCityText))) {
+                    // 市町プルダウン文字列を含むリストの場合
+                    // pタグの親aタグを表示
+                    $(this).parent('a').show();
+                }
+            });
+        }
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
+    };
+
+    powerspot.showListByMystery = function () {
+        // エリア検索からの遷移の判定に使用
+        $('#areaSearchCheck').val("true");
+
+        // title書き換え
+        $('#listTitle').text("mystery7");
 
         // XML読み込み
         var spotArray = [];
@@ -191,12 +301,12 @@
 
         var $pslist = $('#pslist');
         $pslist.empty();
-        $pslist.append(loc).trigger('create').listview('refresh');
+        $pslist.append(loc);
+        $pslist.listview();
+        $pslist.listview('refresh');
     };
 
     powerspot.showDetail = function (showNo) {
-        //$('#map').style.display="block";
-
         $(gXml).find("spot").each(function () {
             var spotNo = Number($("no", this).text());
             if (spotNo === showNo) {
@@ -207,12 +317,12 @@
                 var spotComment = $("comment", this).text();
 
                 // title書き換え
-                $('#detailTitle').text(spotName);
+                $('#detailTitle').text($('#listTitle').text());
                 gSpotName = spotName;
 
                 // 情報表示
                 var dom = '';
-                dom = dom + '<h3>' + spotName + '<a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/megane.png" style="width:24px;height:24px;"></a></h3>';
+                dom = dom + '<h3>' + spotName + '</h3><a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/list_icon.png" style="width:24px;height:24px;">Googleで検索</a>';
                 dom = dom + '<p>' + spotComment + '</p>';
                 dom = dom + '<p>' + spotAdress + '</p>';
                 $('#detail').empty().append(dom).trigger('create');

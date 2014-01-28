@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css"/>
     <link rel="stylesheet" href="css/powerspot.css">
+	<link rel="stylesheet" href="themes/aps_thene.min.css"/>
     <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
     <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -16,25 +17,94 @@
 
 <!-- トップページ -->
 <div data-role="page" id="homePage" data-title="そうだ！パワースポットへ行こう＠ふじのくに" data-theme="a">
-    <div data-role="header" data-position="fixed">
+    <div data-role="header">
         <img id="banner" src="img/angelps.png">
     </div>
 
-    <div id="category" data-role="content">
+    <div id="category" class="ui-grid-b" data-role="content">
+        <div class="ui-block-a">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(3)">
+                <div class="category-img"><img src="./img/top_icon_en.png"></div>
+                <div class="category-txt">縁結び</div>
+            </a>
+        </div>
+        <div class="ui-block-b">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(0)">
+                <div class="category-img"><img src="./img/top_icon_renai.png"></div>
+                <div class="category-txt">恋愛・結婚</div>
+            </a>
+        </div>
+        <div class="ui-block-c">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(1)">
+                <div class="category-img"><img src="./img/top_icon_anzan.png"></div>
+                <div class="category-txt">子宝・安産</div>
+            </a>
+        </div>
+        <div class="ui-block-a">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(2)">
+                <div class="category-img"><img src="./img/top_icon_fufu.png"></div>
+                <div class="category-txt">夫婦円満</div>
+            </a>
+        </div>
+        <div class="ui-block-b">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()">
+                <div class="category-img"><img src="./img/top_icon_mystery.png"></div>
+                <div class="category-txt">mystery7</div>
+            </a>
+        </div>
+        <div class="ui-block-c">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(4)">
+                <div class="category-img"><img src="./img/top_icon_date.png"></div>
+                <div class="category-txt">デート</div>
+            </a>
+        </div>
+        <div class="ui-block-a">
+            <a href="#searchPage" data-transition="slide">
+                <div class="category-img"><img src="./img/top_icon_word.png"></div>
+                <div class="category-txt">文字検索</div>
+            </a>
+        </div>
+        <div class="ui-block-b">
+            <a href="#listPage" data-transition="slide" onClick="powerspot.showList(5)">
+                <div class="category-img"><img src="./img/top_icon_etc.png"></div>
+                <div class="category-txt">諸願成就</div>
+            </a>
+        </div>
+        <div class="ui-block-c">
+            <a href="#areaPage" data-transition="slide">
+                <div class="category-img"><img src="./img/top_icon_area.png"></div>
+                <div class="category-txt">エリア検索</div>
+            </a>
+        </div>
     </div>
 
     <div data-role="footer">
-        <h4>Copyright 2014</h4>
+        <h4><a href="http://www.pref.shizuoka.jp/kousei/ko-130/aps.html" rel="external" target="_blank">エンゼルパワースポット公式</a></h4>
     </div>
 </div>
 
 <!-- 検索ページ -->
 <div data-role="page" data-close-btn="none" data-dialog="true" id="searchPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに"
      data-theme="a">
-    <div data-role="content">
+    <div class="search-box" data-role="content">
         <p>検索キーワードを入力してください</p>
         <input type="text" id="keyword">
-        <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-b">OK</a>
+        <a href="#" id="keyword-cancel" data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">キャンセル</a>
+        <a href="#" id="keyword-ok"     data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">OK</a>
+    </div>
+</div>
+
+<!-- エリアページ -->
+<div data-role="page" data-close-btn="none" data-dialog="true" id="areaPage" data-title="そうだ！パワースポットへ行こう＠ふじのくに"
+     data-theme="a">
+    <div class="search-box" data-role="content">
+        <p>地域を選択してください</p>
+        <fieldset data-role="controlgroup">
+            <select id="searchArea"></select>
+            <select id="searchCity"></select>
+        </fieldset>
+        <a href="#" id="area-cancel" data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">キャンセル</a>
+        <a href="#" id="area-ok"     data-rel="back" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-b">OK</a>
     </div>
 </div>
 
@@ -49,13 +119,12 @@
 
     <div data-role="content">
         <div data-role="fieldcontain">
-            <label>絞り込み：</label>
             <fieldset data-role="controlgroup" data-type="horizontal">
                 <select id="area"></select>
                 <select id="city"></select>
             </fieldset>
         </div>
-        <ul id="pslist" data-role="listview" data-filter="true">
+        <ul id="pslist" data-role="listview" data-filter="false">
         </ul>
     </div>
 
@@ -68,6 +137,8 @@
             </ul>
         </div>
     </div>
+    <!-- 以下のhiddenは一覧上の地域絞り込みを削除するための判定に使用 -->
+    <input type="hidden" id="areaSearchCheck">
 </div>
 
 <!-- 詳細ページ -->
@@ -80,7 +151,7 @@
         <div id="map" class="ui-shadow"></div>
         <div id="detail"></div>
         <div>
-            <a id="map_route" target="_blank" href="">Google Mapで現在地からの経路検索</a>
+            <a id="map_route" target="_blank" href=""><img src="./img/list_icon.png" style="width:24px;height:24px;">Google Mapで現在地からの経路検索</a>
         </div>
     </div>
 
