@@ -80,6 +80,8 @@
                     // 地域プルダウンの追加
                     $area.append($('<option>').attr({value: areaKey}).text(areaName));
                 });
+                $area.val(0);
+                $area.selectmenu('refresh', true);
             })
             .fail(function () {
                 alert("情報の読み込みに失敗しました");
@@ -141,6 +143,8 @@
                     // 地域プルダウンの追加
                     $area.append($('<option>').attr({value: areaKey}).text(areaName));
                 });
+                $area.val(0);
+                $area.selectmenu('refresh', true);
             })
             .fail(function () {
                 alert("情報の読み込みに失敗しました");
