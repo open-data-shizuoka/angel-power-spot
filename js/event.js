@@ -33,6 +33,12 @@
 
     $(document).on({
         "click": function () {
+            var $area = $('#searchArea'),
+                $city = $('#searchCity');
+            // 地域プルダウンの選択値のクリア
+            $area.empty();
+            // 市町プルダウンの選択値のクリア
+            $city.empty();
         }
     }, "#area-cancel");
 
