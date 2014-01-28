@@ -70,7 +70,7 @@
         })
             .done(function (xml) {
                 // 地域プルダウンの未選択用項目の追加
-                $area.append($('<option>').attr({value: 0}).text("--地域で絞り込む--"));
+                $area.append($('<option>').attr({value: 0}).text("--地域を選択--"));
                 // 地域データをループ
                 $(xml).find("area").each(function () {
                     // 地域キーの取得
@@ -261,7 +261,7 @@
                         // 地域選択値配下にある市町データに対する処理
                         if (areaKey === selectArea) {
                             // 市町プルダウンの未選択用項目の追加
-                            $city.append($('<option>').attr({value: 0}).text("--市町で絞り込む--"));
+                            $city.append($('<option>').attr({value: 0}).text("--市町を選択--"));
                             // 該当地域ごとの市町データをループして取得
                             $(this).find("city").each(function () {
                                 // 市町キーの取得
