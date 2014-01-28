@@ -304,8 +304,6 @@
     };
 
     powerspot.showDetail = function (showNo) {
-        //$('#map').style.display="block";
-
         $(gXml).find("spot").each(function () {
             var spotNo = Number($("no", this).text());
             if (spotNo === showNo) {
@@ -321,7 +319,7 @@
 
                 // 情報表示
                 var dom = '';
-                dom = dom + '<h3>' + spotName + '<a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/megane.png" style="width:24px;height:24px;"></a></h3>';
+                dom = dom + '<h3>' + spotName + '</h3><a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/megane.png" style="width:24px;height:24px;">Googleで検索</a>';
                 dom = dom + '<p>' + spotComment + '</p>';
                 dom = dom + '<p>' + spotAdress + '</p>';
                 $('#detail').empty().append(dom).trigger('create');

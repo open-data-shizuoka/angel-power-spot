@@ -14,8 +14,6 @@
 #category {
     margin: 5px;
     text-align: center;
-    border: 6px solid #FF99FF;
-    border-radius: 120% 5% 110% 5% / 5% 110% 5% 120%;
 }
 
 #category > * {
