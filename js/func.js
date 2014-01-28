@@ -11,12 +11,12 @@
         "1": "子宝・安産",
         "2": "夫婦円満",
         "3": "縁結び",
-        "4": "観光・自然・デート",
-        "5": "諸願成就・その他",
+        "4": "デート",
+        "5": "諸願成就",
         //"6":"カテゴリなし",
-        "77": "ミステリ７",
-        "88": "検索(keyword)",
-        "99": "検索(全表示)"
+        "77": "mystery７",
+        "88": "文字検索",
+        "99": "エリア検索"
     };
 
     // カテゴリ別スポット件数カウント
@@ -49,7 +49,7 @@
             if (categoryArray.hasOwnProperty(key)) {
                 if (key === "88") {
                     // キーワード検索
-                    btn = btn + '<li><a href="#searchPage" data-transition="pop">検索(keyword)<span class="ui-li-count">?</span></a></li>';
+                    btn = btn + '<li><a href="#searchPage" data-transition="pop">文字検索<span class="ui-li-count">?</span></a></li>';
                 } else if (key === "77") {
                     // ラッキー7
                     btn = btn + '<li><a href="#listPage" data-transition="slide" onClick="powerspot.showListByMystery()"><img src="./img/top_icon_anzan.png">' + categoryArray[key] + '<span class="ui-li-count">' + countSpot(key) + '</span></a></li>';
@@ -262,7 +262,7 @@
         $('#areaSearchCheck').val("true");
 
         // title書き換え
-        $('#listTitle').text("ミステリ7");
+        $('#listTitle').text("mystery7");
 
         // XML読み込み
         var spotArray = [];
@@ -322,7 +322,7 @@
 
                 // 情報表示
                 var dom = '';
-                dom = dom + '<h3>' + spotName + '</h3><a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/megane.png" style="width:24px;height:24px;">Googleで検索</a>';
+                dom = dom + '<h3>' + spotName + '</h3><a href="http://www.google.co.jp/search?q=' + spotName + '" rel="external" target="_blank"><img src="./img/list_icon.png" style="width:24px;height:24px;">Googleで検索</a>';
                 dom = dom + '<p>' + spotComment + '</p>';
                 dom = dom + '<p>' + spotAdress + '</p>';
                 $('#detail').empty().append(dom).trigger('create');
